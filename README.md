@@ -10,8 +10,6 @@ It works in the follwing manner:
 - You can define application (whatever can be an application which is using a database)
 - You can define as many systems as you need for an application (deployed instances of the applications)
 - You can add your SQL changes to applications
-- You can keep track your unrolled/rolled out changes for eac system induvidually
+- You can keep track your unrolled/rolled out changes for each system induvidually
 
-To make it more handful this webapp is able to generate a Greasemonkey script which will be installed on the same server to the Adminer. 
-
-This script will inject a small piece of Javascript code to your adminer page which will add a "Save to SQL change tracker" link to your SQL query result view or after-alter-view. By clicking that link your query will be automatically added to the SQL change tracker through a REST API. 
+The Greasemonkey script in the gs_script folder will inject a small piece of Javascript code to your adminer page which will add a "Save to SQL change tracker" link to your SQL query result view or after-alter-view. By clicking that link your query will be automatically added to the SQL change tracker through a REST API. 
