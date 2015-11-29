@@ -39,7 +39,7 @@ function main() {
 			} else {
 				var masterDatabase = "";
 				if (jQ('#dbs').children('select').first().length)
-					masterDatabase = ('#dbs').children('select').first().val();
+					masterDatabase = jQ('#dbs').children('select').first().val();
 				else // sqlite database
 					masterDatabase = jQ('#dbs').children('input[name=db]').val();
 				var postData = {
