@@ -71,7 +71,7 @@ class ApplicationsController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Application->save($this->request->data)) {
 				$this->Session->setFlash(__('The application has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'index', 'controller' => 'systems', $id));
 			} else {
 				$this->Session->setFlash(__('The application could not be saved. Please, try again.'));
 			}

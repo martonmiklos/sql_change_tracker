@@ -23,6 +23,7 @@ class RolloutsController extends AppController {
 	public function index($system_id) 
 	{
 		$this->Rollout->recursive = 0;
+		// FIXME change order
 		$this->set('rollouts', $this->Paginator->paginate(array('Rollout.system_id' => $system_id)));
 		
 		$this->System->recursive = -1;
@@ -34,7 +35,7 @@ class RolloutsController extends AppController {
 				'contain' => array(
 					'Application'
 				),
-				'fields' => array('System.id', 'System.name', 'System.application_id', 'Application.id', 'Application.name')
+				'fields' => array('System.id', 'System.name', 'System.sql_change_id', 'System.application_id', 'Application.id', 'Application.name')
 			)
 		);
 		$this->set(compact('system'));
@@ -49,6 +50,17 @@ class RolloutsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Rollout->create();
 			$this->request->data['Rollout']['system_id'] = $system_id;
+			
+			if ($this->request->data['Rollout']['rolled_out']) {
+				$this->Rollout->System->id = $system_id;
+				$this->Rollout->System->recursive = -1;
+				$system = $this->Rollout->System->read(array('id', 'sql_change_id'));
+				$system['System']['sql_change_id'] = $this->request->data['Rollout']['end_change_id'];
+				if (!$this->Rollout->System->save($system)) {
+					$this->Session->setFlash(__('Unable to bump the sql change revision of the system!'));
+					return;
+				}
+			}
 			if ($this->Rollout->save($this->request->data)) {
 				$this->Session->setFlash(__('The rollout has been saved.'));
 				return $this->redirect(array('action' => 'index', $system_id));

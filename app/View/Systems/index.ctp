@@ -45,5 +45,6 @@
 		<li><?php echo $this->Html->link(__('New System'), array('action' => 'add', $application_id)); ?></li>
 		<li><?php echo $this->Html->link(__('List Sql Changes'), array('controller' => 'sql_changes', 'action' => 'index', $application_id)); ?> </li>
 		<li><?php echo $this->Html->link(__('New Application'), array('controller' => 'applications', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Edit application'), array('controller' => 'applications', 'action' => 'edit', $application_id)); ?> </li>
 	</ul>
 </div>

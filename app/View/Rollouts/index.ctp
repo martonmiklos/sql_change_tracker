@@ -1,5 +1,5 @@
 <div class="rollouts index">
-	<h2><?php echo __('Rollouts of the %s system', $system['System']['name']); ?></h2>
+	<h2><?php echo __('Rollouts of the %s system (at sql change rev #%d)', $system['System']['name'], $system['System']['sql_change_id']); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>

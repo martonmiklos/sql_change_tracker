@@ -21,7 +21,7 @@
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Rollouts'), array('action' => 'index', $system['System']['application_id'])); ?></li>
-		<li><?php echo $this->Html->link(__('List Systems'), array('controller' => 'systems', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Systems'), array('controller' => 'systems', 'action' => 'index', $system['System']['application_id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Sql Changes'), array('controller' => 'sql_changes', 'action' => 'index', $system['System']['application_id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('New SQL Change'), array('controller' => 'sql_changes', 'action' => 'add', $system['System']['application_id'])); ?> </li>
 	</ul>
