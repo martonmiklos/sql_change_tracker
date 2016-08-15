@@ -6,7 +6,7 @@ I did got many times so I have created this tool to make life easier.
 
 It works in the follwing manner:
 
-- There is a small CRUD webapplication baked in CakePHP.
+- There is a small CRUD webapplication baked in CakePHP 2.x. (I know that Cake 2.x is outdated now, but when the time I started it was the cutting edge.)
 - You can define application (whatever can be an application which is using a database)
 - You can define as many systems as you need for an application (deployed instances of the applications)
 - You can add your SQL changes to applications
