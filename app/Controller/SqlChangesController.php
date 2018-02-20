@@ -176,15 +176,15 @@ class SqlChangesController extends AppController {
 	
 	private function updateRevisionFile($filePath, $revision)
 	{
-		if ($filePath != '') {
+		if ($filePath != '' && file_exists($filePath)) {
 			$jsonData = json_decode(file_get_contents($filePath), true);
 			$jsonData['sqlRevision'] = $revision;
 			$jsonData = json_encode($jsonData, JSON_PRETTY_PRINT);
-			if (!file_put_contents($filePath, $jsonData)) {
-				return false;
+			if (file_put_contents($filePath, $jsonData)) {
+				return true;
 			}
-		}
-		return true;
+		} 
+		return false;
 	}
 	
 	public function add_sql_change() 
@@ -209,7 +209,9 @@ class SqlChangesController extends AppController {
 					$result = 'ok';
 				}
 				
-				$this->updateRevisionFile($applicationData['Application']['revision_file_path'], $this->SqlChange->id);
+				if (!$this->updateRevisionFile($applicationData['Application']['revision_file_path'], $this->SqlChange->id)) {
+					$result = __('Unable to update the revision file (%s)', $applicationData['Application']['revision_file_path']);
+				}
 			}
 		}
 		$this->set('result', $result);

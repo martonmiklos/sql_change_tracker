@@ -23,7 +23,7 @@ class RolloutsController extends AppController {
 	public function index($system_id) 
 	{
 		$this->Rollout->recursive = 0;
-		// FIXME change order
+		$this->Paginator->settings = array('order' => array('Rollout.id' => 'DESC'));
 		$this->set('rollouts', $this->Paginator->paginate(array('Rollout.system_id' => $system_id)));
 		
 		$this->System->recursive = -1;
