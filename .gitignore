@@ -3,3 +3,4 @@ lib/*
 tmp/*
 app/tmp/*
 Plugin/DebugKit/*
+*.kate.swp

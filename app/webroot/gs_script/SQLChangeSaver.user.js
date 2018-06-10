@@ -21,8 +21,8 @@ function addJQuery(callback) {
 function main() {
     // Note, jQ replaces $ to avoid conflicts.
     var msg = jQ('div .message');
-    if (msg.length || 1) {
-        jQ('<a id="savetotracker-link" href="#">&nbsp;Save to SQL change tracker</a>').insertAfter( /*msg.first().children("a:last")*/ jQ('#breadcrumb'));
+    if (msg.length) {
+        jQ('<a id="savetotracker-link" href="#">&nbsp;Save to SQL change tracker</a>').insertAfter(msg.first().children("a:last"));
         jQ('#savetotracker-link').attr('href', msg.first().children("a:last").attr('href'));
         jQ('#savetotracker-link').click(function() {
             var sql = '';
