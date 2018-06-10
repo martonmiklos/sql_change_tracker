@@ -189,7 +189,7 @@ class SqlChangesController extends AppController {
 	
 	public function add_sql_change() 
 	{
-		$result = 'fail';
+		$result = 'failjh';
 		if ($this->request->is('post')) {
 			$this->SqlChange->Application->recursive = -1;
 			$applicationData = $this->SqlChange->Application->findByMasterDatabase(
@@ -198,6 +198,7 @@ class SqlChangesController extends AppController {
 			);
 			
 			if (isset($applicationData['Application']['id'])) {
+                /// always append a closing ;
 				if (mb_substr($this->request->data['SqlChange']['sql'], -1) !== ';')
 					$this->request->data['SqlChange']['sql'] = $this->request->data['SqlChange']['sql'] . ';';
 				$sqlChangeData = array(
@@ -207,12 +208,18 @@ class SqlChangesController extends AppController {
 				$this->SqlChange->create();
 				if ($this->SqlChange->save($sqlChangeData)) {
 					$result = 'ok';
+				} else {
+                    $result = $this->validationErrors;
 				}
 				
 				if (!$this->updateRevisionFile($applicationData['Application']['revision_file_path'], $this->SqlChange->id)) {
 					$result = __('Unable to update the revision file (%s)', $applicationData['Application']['revision_file_path']);
 				}
+			} else {
+                $result = __('Application not found with master database: %s', $this->request->data['SqlChange']['masterDatabase']);
 			}
+		} else {
+            $result = __('Non post requests not supported');
 		}
 		$this->set('result', $result);
 	}

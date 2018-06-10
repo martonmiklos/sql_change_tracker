@@ -1,2 +1,5 @@
 vendor/* 
 lib/*
+tmp/*
+app/tmp/*
+Plugin/DebugKit/*
